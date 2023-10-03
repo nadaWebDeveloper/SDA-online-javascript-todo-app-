@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TO-DO LIST</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
+
 <body>
+
+<div class="listApp">
+
+    <!-- inside <div> with class container to add flexbox property -->
+<div class="container">
+    <div id="back">
+    <input type="text" placeholder="......To-Do List......">
+    <button id="id-btn">Add</button>
+    </div>
+        <!-- to show the task on screen by JS when user add task-->
+  <div id="tasks">
+            <!-- count to Calculates task & completed task -->
+    <p id="show-tasks">
+     YOU HAVE <span class="count-task">0</span> TASK TO COMPLETE .IT'S COMPLETED <span class="count-completed">0</span>
+    </p>
+  </div>
+
+</div>
+
+<p id="MessageError">INPUT CANNOT BE EMPTY !!!</p>
+
+</div>
+
+
     
+<script src="index.js"></script>
+
 </body>
 </html>
