@@ -1,47 +1,231 @@
-const addBtn = document.querySelector("#id-btn");
+const todoForm = document.querySelector("#todoForm");
+const todoInput = document.querySelector("#todoInput");
+const todoList = document.querySelector("#todoList");
+const editForm = document.querySelector("#editForm");
+const editInput = document.querySelector("#editInput");
+const cancelEdit = document.querySelector("#cancelBtn");
+const searchForm = document.querySelector("#serchForm"); 
+
+
+const addBtn = document.querySelector("#addBtn");
 const taskInput = document.querySelector("#back input");
 const taskCounter = document.querySelector("#tasks");
 const error = document.getElementById("MessageError");
 const countTask = document.querySelector("count-task");
 
-let taskCount = 0;
 
-const displayCount = (taskCount) =>
+let oldInputValue;
+
+
+
+const saveTodo = (text) =>
 {
-    countTask.innerText =  taskCount;
+   const todo = document.createElement("div");
+   todo.classList.add("todo");
+
+   const todoTitle = document.createElement("h3");
+   todoTitle.innerText = text ;
+   todo.appendChild(todoTitle);
+
+   const doneBtn = document.createElement("input");
+   doneBtn.setAttribute("type", "checkbox");
+   doneBtn.classList.add("fishTodo");
+   // doneBtn.innerHTML = "Done";
+   todo.appendChild(doneBtn);
+
+   const editBtn = document.createElement("button");
+   editBtn.classList.add("editTodo");
+   editBtn.innerHTML = "Edit";
+   todo.appendChild(editBtn);
+
+   const removeBtn = document.createElement("button");
+   removeBtn.classList.add("removeTodo");
+   removeBtn.innerHTML = "Delete";
+   todo.appendChild(removeBtn);
+
+   todoList.appendChild(todo);
+
+    todoInput.value = "";
+    todoInput.focus();
+
+}
+
+
+const toggleForm = () =>
+{
+   searchForm.classList.toggle("hide");
+   todoForm.classList.toggle("hide");
+   todoList.classList.toggle("hide");
+   taskCounter.classList.toggle("hide");
+
+
 }
 
 
 
 
-const addNewTask = () =>
+
+todoForm.addEventListener("submit", (e) => 
 {
-    const taskName = taskInput.value.trim();
-    error.style.display = "none";
+
+e.preventDefault();
+const inputValue = todoInput.value;
+todoInput.value = "";
 
 
-    if(!taskName)
-    {
-       setTimeout(() => {
-        error.style.display = "block";
-       }, 200);
-       return;
-    }
- const task = `
-    <div class="task">
-    <input type="checkbox" class="taskCheck">
-    <span class="taskName">${taskName}</span>
-    <button class="edit"></button>
-    <button class="delete"></button>
-    </div>
- `
+if(inputValue)
+{
+   saveTodo(inputValue);
+   console.log("Added to ToDo List");
 
- taskCounter.insertAdjacentHTML("beforeend",task)
+}
+else
+{
+   setTimeout(() => {
+    error.style.display = "block";
+      }, 100);
+  return ;
+}
 
+});
+
+
+
+
+
+
+
+document.addEventListener("click" , (e) => 
+{
+
+const targetEl = e.target;
+const parentEl = targetEl.closest("div");
+let todoTitle;
+
+if(parentEl && parentEl.querySelector("h3"))
+{
+   todoTitle = parentEl.querySelector("h3").innerText;
 }
 
 
-addBtn.addEventListener("click", addNewTask() );
+
+if(targetEl.classList.contains("fishTodo"))
+{
+   parentEl.classList.toggle("done");
+}
+
+if(targetEl.classList.contains("removeTodo"))
+{
+   parentEl.remove();
+}
+
+if(targetEl.classList.contains("editTodo"))
+{
+   toggleForm();
+
+   editInput.value = todoTitle;
+   oldInputValue.value = todoTitle;
+
+}
+
+});
+
+
+
+
+cancelEdit.addEventListener("click", (e) => 
+{
+e.preventDefault();
+
+toggleForm();
+
+});
+
+
+
+
+editForm.addEventListener("submit", (e) =>
+{
+   e.preventDefault();
+
+   const editInputValue = editInput.value;
+
+   if(editInputValue)
+   {
+
+   }
+
+   toggleForm();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let taskCount = 0;
+
+// const displayCount = (taskCount) =>
+// {
+//     countTask.innerText =  taskCount;
+// }
+
+
+
+
+// const addNewTask = () =>
+// {
+//     const taskName = taskInput.value.trim();
+//     error.style.display = "none";
+
+
+//     if(!taskName)
+//     {
+//        setTimeout(() => {
+//         error.style.display = "block";
+//        }, 200);
+//        return;
+//     }
+//  const task = `
+//     <div class="task">
+//     <input type="checkbox" class="taskCheck">
+//     <span class="taskName">${taskName}</span>
+//     <button class="edit"></button>
+//     <button class="delete"></button>
+//     </div>
+//  `
+
+//  taskCounter.insertAdjacentHTML("beforeend",task)
+
+// }
+
+
+// addBtn.addEventListener("click", addNewTask() );
 
 
 

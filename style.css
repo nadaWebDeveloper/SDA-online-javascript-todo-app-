@@ -103,10 +103,11 @@ body
   font-size: 1rem;  
 }
 
-.todo button
+.group
 {
     margin-left: 0.4rem;
 }
+
 
 .done
 {
@@ -124,6 +125,15 @@ body
 .hide
 {
    display: none;
+}
+
+
+#show-tasks
+{
+    text-align: center;
+    margin: 1em;
+    border: solid 1px;;
+    padding: 0.8em;
 }
 
 #MessageError

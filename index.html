@@ -18,19 +18,24 @@
 
 
     <!-- for put element in columns style -->
+    <form id="todoForm">
     <div class="back">
-         <input type="text" placeholder="......To-Do List......">
-         <button type="submit" id="id-btn">Add</button>
+         <input type="text" id="todoInput" placeholder="......To-Do List......">
+         <button type="submit" id="addBtn">Add</button>
     </div>
+    </form>
 
 
     <!-- for search -->
-    <div id="toolbar" class="back saerch">
+    <div id="toolbar" class="saerch">
     <!-- <div id="search"> -->
+        <form id="serchForm" class="back" >
         <input type="text" id="searchInput" placeholder="Search ...">
         <button type="submit" id="searchBtn">Search</button>
+        </form>
     <!-- </div> -->
     </div>
+
 
 
     <div id="filter">
@@ -43,37 +48,35 @@
         <!-- to show the task on screen by JS when user add task-->
     <div id="tasks">
         <p id="show-tasks">
-         YOU HAVE [<span class="count-task">0</span>] TASK TO COMPLETE .IT'S COMPLETED [<span class="count-completed">0</span>]
+         YOU HAVE [<span class="count-task">0</span>] TASK TO COMPLETE.<br> 
+         IT'S COMPLETED [<span class="count-completed">0</span>]
         </p>
     </div>
 
 
      <!-- for edit  -->
-     <div class="back hide control">
+    <form id="editForm" class="">
+    <div class="back control">
         <input type="text" id="editInput">
         <button type="submit">Edit</button>
-   </div>
-
-
-     <!-- for cancel edit -->
-     <div class="back">
         <button id="cancelBtn">Cancel</button>
-   </div>
+    </div>
+    </form>    
+
 
 
     <div id="todoList" class="back">
         <div class="todo done">
             <h3> nadayahya a;lmalkig gfgfsssgesf hhkhjfghfgfgfgf</h3>
-            <button class="fishTodo">check</button>
-            <button class="editTodo">edit</button>
-            <button class="removeTodo">delete</button>
+            <input type="checkbox" name="" class="fishTodo group">
+            <button class="editTodo group">edit</button>
+            <button class="removeTodo group">delete</button>
         </div>
     </div>
 
-</div>
+</div >
     <p id="MessageError">INPUT CANNOT BE EMPTY !!!</p>
 </div>
-
 
     
 <script src="index.js"></script>
