@@ -7,8 +7,10 @@
 
 body
 {
-    height: 100vh;
-    background-color: rgb(197, 220, 243);
+    background-image: url(back.jpeg);
+    background-position: center;
+    background-size: cover;
+
 }
 
 .listApp
@@ -31,7 +33,7 @@ body
     justify-content: center; */
 }
 
-#back
+.back
 {
     position: relative;
     display: grid;
@@ -40,7 +42,7 @@ body
     margin-bottom: 0.9em;
 }
 
-#back input
+.back input
 {
     width: 100%;
     background-color: rgb(76, 33, 33, 0.6);
@@ -51,7 +53,7 @@ body
     padding: 1em ;
 }
 
-#back button
+.back button
 {
     position: relative;
     border-radius: 1em;
@@ -61,6 +63,67 @@ body
     border: none;
     outline: none;
     color: rgb(239, 245, 245);
+    cursor: pointer;
+}
+
+#filter
+{
+    display: flex;
+    justify-content: space-around;
+    height: 2em;
+    margin-bottom: 1em;
+}
+
+#filter button
+{
+    border-radius: 1em;
+    font-weight: 700;
+    font-size: 1em;
+    background-color: rgba(76, 33, 33, 0.5);
+    border: none;
+    outline: none;
+    color: rgb(239, 245, 245);
+    cursor: pointer;
+}
+
+.todo 
+{
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   padding: 1rem;
+   border-bottom: solid 1px;
+   border-top: solid 1px;
+   transition: 0.3s;
+}
+
+.todo h3
+{
+  flex: 1;
+  font-size: 1rem;  
+}
+
+.todo button
+{
+    margin-left: 0.4rem;
+}
+
+.done
+{
+    background-color: rgba(194, 214, 227, 0.5);
+
+}
+
+.done h3
+{
+    color:#0c4b25;
+    text-decoration: line-through;
+    font-style: italic;
+}
+
+.hide
+{
+   display: none;
 }
 
 #MessageError

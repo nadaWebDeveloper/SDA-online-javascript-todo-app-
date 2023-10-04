@@ -15,22 +15,63 @@
 
     <!-- inside <div> with class container to add flexbox property -->
 <div class="container">
-    <div id="back">
-    <input type="text" placeholder="......To-Do List......">
-    <button id="id-btn">Add</button>
+
+
+    <!-- for put element in columns style -->
+    <div class="back">
+         <input type="text" placeholder="......To-Do List......">
+         <button type="submit" id="id-btn">Add</button>
     </div>
+
+
+    <!-- for search -->
+    <div id="toolbar" class="back saerch">
+    <!-- <div id="search"> -->
+        <input type="text" id="searchInput" placeholder="Search ...">
+        <button type="submit" id="searchBtn">Search</button>
+    <!-- </div> -->
+    </div>
+
+
+    <div id="filter">
+       <button value="all">All</button>
+       <button value="done">Completed</button>
+       <button value="todo">ToDo</button>
+    </div>
+
+
         <!-- to show the task on screen by JS when user add task-->
-  <div id="tasks">
-            <!-- count to Calculates task & completed task -->
-    <p id="show-tasks">
-     YOU HAVE <span class="count-task">0</span> TASK TO COMPLETE .IT'S COMPLETED <span class="count-completed">0</span>
-    </p>
-  </div>
+    <div id="tasks">
+        <p id="show-tasks">
+         YOU HAVE [<span class="count-task">0</span>] TASK TO COMPLETE .IT'S COMPLETED [<span class="count-completed">0</span>]
+        </p>
+    </div>
+
+
+     <!-- for edit  -->
+     <div class="back hide control">
+        <input type="text" id="editInput">
+        <button type="submit">Edit</button>
+   </div>
+
+
+     <!-- for cancel edit -->
+     <div class="back">
+        <button id="cancelBtn">Cancel</button>
+   </div>
+
+
+    <div id="todoList" class="back">
+        <div class="todo done">
+            <h3> nadayahya a;lmalkig gfgfsssgesf hhkhjfghfgfgfgf</h3>
+            <button class="fishTodo">check</button>
+            <button class="editTodo">edit</button>
+            <button class="removeTodo">delete</button>
+        </div>
+    </div>
 
 </div>
-
-<p id="MessageError">INPUT CANNOT BE EMPTY !!!</p>
-
+    <p id="MessageError">INPUT CANNOT BE EMPTY !!!</p>
 </div>
 
 
