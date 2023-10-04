@@ -5,8 +5,6 @@ const editForm = document.querySelector("#editForm");
 const editInput = document.querySelector("#editInput");
 const cancelEdit = document.querySelector("#cancelBtn");
 const searchForm = document.querySelector("#serchForm"); 
-
-
 const addBtn = document.querySelector("#addBtn");
 const taskInput = document.querySelector("#back input");
 const taskCounter = document.querySelector("#tasks");
@@ -20,6 +18,7 @@ let oldInputValue;
 
 const saveTodo = (text) =>
 {
+   todoList.style.display = "block";
    const todo = document.createElement("div");
    todo.classList.add("todo");
 
@@ -30,7 +29,6 @@ const saveTodo = (text) =>
    const doneBtn = document.createElement("input");
    doneBtn.setAttribute("type", "checkbox");
    doneBtn.classList.add("fishTodo");
-   // doneBtn.innerHTML = "Done";
    todo.appendChild(doneBtn);
 
    const editBtn = document.createElement("button");
@@ -57,10 +55,27 @@ const toggleForm = () =>
    todoForm.classList.toggle("hide");
    todoList.classList.toggle("hide");
    taskCounter.classList.toggle("hide");
-
-
+   editForm.classList.toggle("hide");
 }
 
+
+
+const updateTodo = (text) =>
+{
+    const todos = document.querySelectorAll("todo");
+
+    todos.forEach((todo) => 
+    {
+      let todoTitle = todo.querySelector("h3");
+      console.log(`${todoTitle} ,${text}`);
+
+      if(todoTitle.innerText === oldInputValue)
+      {
+         todoTitle.innerText = text ;
+      
+      }
+    });
+}
 
 
 
@@ -108,7 +123,6 @@ if(parentEl && parentEl.querySelector("h3"))
 }
 
 
-
 if(targetEl.classList.contains("fishTodo"))
 {
    parentEl.classList.toggle("done");
@@ -122,9 +136,10 @@ if(targetEl.classList.contains("removeTodo"))
 if(targetEl.classList.contains("editTodo"))
 {
    toggleForm();
+   console.log("the same text")
 
    editInput.value = todoTitle;
-   oldInputValue.value = todoTitle;
+   oldInputValue = todoTitle;
 
 }
 
@@ -136,6 +151,7 @@ if(targetEl.classList.contains("editTodo"))
 cancelEdit.addEventListener("click", (e) => 
 {
 e.preventDefault();
+console.log("cancel edit")
 
 toggleForm();
 
@@ -147,18 +163,20 @@ toggleForm();
 editForm.addEventListener("submit", (e) =>
 {
    e.preventDefault();
-
    const editInputValue = editInput.value;
 
    if(editInputValue)
    {
-
+      updateTodo(editInputValue);
+      console.log("changed");
+      toggleForm();
    }
-
-   toggleForm();
+   else
+   {
+      toggleForm();
+     console.log("canceled");
+   }
 })
-
-
 
 
 
