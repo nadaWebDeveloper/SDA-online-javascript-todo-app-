@@ -4,180 +4,243 @@ const todoList = document.querySelector("#todoList");
 const editForm = document.querySelector("#editForm");
 const editInput = document.querySelector("#editInput");
 const cancelEdit = document.querySelector("#cancelBtn");
-const searchForm = document.querySelector("#serchForm"); 
-const addBtn = document.querySelector("#addBtn");
-const taskInput = document.querySelector("#back input");
-const taskCounter = document.querySelector("#tasks");
+const searchInput = document.querySelector("#searchInput");
 const error = document.getElementById("MessageError");
-const countTask = document.querySelector("count-task");
 
 
 let oldInputValue;
 
+const saveTodo = (text) => {
+    todoList.style.display = "block";
+    const todo = document.createElement("div");
+    todo.classList.add("todo");
 
+    const todoTitle = document.createElement("h3");
+    todoTitle.innerText = text;
+    todo.appendChild(todoTitle);
 
-const saveTodo = (text) =>
-{
-   todoList.style.display = "block";
-   const todo = document.createElement("div");
-   todo.classList.add("todo");
+    const doneBtn = document.createElement("input");
+    doneBtn.setAttribute("type", "checkbox");
+    doneBtn.classList.add("fishTodo");
+    todo.appendChild(doneBtn);
 
-   const todoTitle = document.createElement("h3");
-   todoTitle.innerText = text ;
-   todo.appendChild(todoTitle);
+    const editBtn = document.createElement("button");
+    editBtn.classList.add("editTodo");
+    editBtn.innerHTML = "Edit";
+    todo.appendChild(editBtn);
 
-   const doneBtn = document.createElement("input");
-   doneBtn.setAttribute("type", "checkbox");
-   doneBtn.classList.add("fishTodo");
-   todo.appendChild(doneBtn);
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("removeTodo");
+    removeBtn.innerHTML = "Delete";
+    todo.appendChild(removeBtn);
 
-   const editBtn = document.createElement("button");
-   editBtn.classList.add("editTodo");
-   editBtn.innerHTML = "Edit";
-   todo.appendChild(editBtn);
-
-   const removeBtn = document.createElement("button");
-   removeBtn.classList.add("removeTodo");
-   removeBtn.innerHTML = "Delete";
-   todo.appendChild(removeBtn);
-
-   todoList.appendChild(todo);
+    todoList.appendChild(todo);
 
     todoInput.value = "";
     todoInput.focus();
-
 }
 
-
-const toggleForm = () =>
-{
-   searchForm.classList.toggle("hide");
-   todoForm.classList.toggle("hide");
-   todoList.classList.toggle("hide");
-   taskCounter.classList.toggle("hide");
-   editForm.classList.toggle("hide");
+const toggleForm = () => {
+    editForm.classList.toggle("hide");
 }
 
-
-
-const updateTodo = (text) =>
-{
-    const todos = document.querySelectorAll("todo");
-
-    todos.forEach((todo) => 
-    {
-      let todoTitle = todo.querySelector("h3");
-      console.log(`${todoTitle} ,${text}`);
-
-      if(todoTitle.innerText === oldInputValue)
-      {
-         todoTitle.innerText = text ;
-      
-      }
+const updateTodo = (text) => {
+    const todos = document.querySelectorAll(".todo");
+    todos.forEach((todo) => {
+        let todoTitle = todo.querySelector("h3");
+        if (todoTitle.innerText === oldInputValue) {
+            todoTitle.innerText = text;
+        }
     });
 }
 
+todoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const inputValue = todoInput.value;
+    todoInput.value = "";
 
+    if (inputValue) {
+        saveTodo(inputValue);
+    } else {
+        // Handle error display (based on your setup)
+        setTimeout(() => {
+             error.style.display = "block";
+               }, 100);
+           return ;
 
-
-todoForm.addEventListener("submit", (e) => 
-{
-
-e.preventDefault();
-const inputValue = todoInput.value;
-todoInput.value = "";
-
-
-if(inputValue)
-{
-   saveTodo(inputValue);
-   console.log("Added to ToDo List");
-
-}
-else
-{
-   setTimeout(() => {
-    error.style.display = "block";
-      }, 100);
-  return ;
-}
-
+    }
 });
 
+document.addEventListener("click", (e) => {
+    const targetEl = e.target;
+    const parentEl = targetEl.closest("div");
+    let todoTitle;
 
+    if (parentEl && parentEl.querySelector("h3")) {
+        todoTitle = parentEl.querySelector("h3").innerText;
+    }
 
+    if (targetEl.classList.contains("fishTodo")) {
+        parentEl.classList.toggle("done");
+    }
 
+    if (targetEl.classList.contains("removeTodo")) {
+        parentEl.remove();
+    }
 
-
-
-document.addEventListener("click" , (e) => 
-{
-
-const targetEl = e.target;
-const parentEl = targetEl.closest("div");
-let todoTitle;
-
-if(parentEl && parentEl.querySelector("h3"))
-{
-   todoTitle = parentEl.querySelector("h3").innerText;
-}
-
-
-if(targetEl.classList.contains("fishTodo"))
-{
-   parentEl.classList.toggle("done");
-}
-
-if(targetEl.classList.contains("removeTodo"))
-{
-   parentEl.remove();
-}
-
-if(targetEl.classList.contains("editTodo"))
-{
-   toggleForm();
-   console.log("the same text")
-
-   editInput.value = todoTitle;
-   oldInputValue = todoTitle;
-
-}
-
+    if (targetEl.classList.contains("editTodo")) {
+        toggleForm();
+        editInput.value = todoTitle;
+        oldInputValue = todoTitle;
+    }
 });
 
-
-
-
-cancelEdit.addEventListener("click", (e) => 
-{
-e.preventDefault();
-console.log("cancel edit")
-
-toggleForm();
-
+cancelEdit.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleForm();
 });
 
+editForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const editInputValue = editInput.value;
 
-
-
-editForm.addEventListener("submit", (e) =>
-{
-   e.preventDefault();
-   const editInputValue = editInput.value;
-
-   if(editInputValue)
-   {
-      updateTodo(editInputValue);
-      console.log("changed");
-      toggleForm();
-   }
-   else
-   {
-      toggleForm();
-     console.log("canceled");
-   }
+    if (editInputValue) {
+        updateTodo(editInputValue);
+        toggleForm();
+    } else {
+        toggleForm();
+    }
 })
 
+// Search functionality
+const filterTodos = (text) => {
+    const todos = todoList.children;
+
+    Array.from(todos).forEach((todo) => {
+        if (!todo.querySelector('h3').innerText.toLowerCase().includes(text)) {
+            todo.classList.add('filtered');
+        } else {
+            todo.classList.remove('filtered');
+        }
+    });
+};
+
+searchInput.addEventListener("input", (e) => {
+    const term = e.target.value.trim().toLowerCase();
+    filterTodos(term);
+});
+
+
+// const todoForm = document.querySelector("#todoForm");
+// const todoInput = document.querySelector("#todoInput");
+// const todoList = document.querySelector("#todoList");
+// const editForm = document.querySelector("#editForm");
+// const editInput = document.querySelector("#editInput");
+// const cancelEdit = document.querySelector("#cancelBtn");
+// const searchForm = document.querySelector("#serchForm"); 
+// const addBtn = document.querySelector("#addBtn");
+// const taskInput = document.querySelector("#back input");
+// const taskCounter = document.querySelector("#tasks");
+// const error = document.getElementById("MessageError");
+// const countTask = document.querySelector("count-task");
+// const search = document.querySelector("input-field"); 
+// const list = document.querySelector("todo"); 
+
+
+
+
+
+// let oldInputValue;
+
+
+
+// const saveTodo = (text) =>
+// {
+//    todoList.style.display = "block";
+//    const todo = document.createElement("div");
+//    todo.classList.add("todo");
+
+//    const todoTitle = document.createElement("h3");
+//    todoTitle.innerText = text ;
+//    todo.appendChild(todoTitle);
+
+//    const doneBtn = document.createElement("input");
+//    doneBtn.setAttribute("type", "checkbox");
+//    doneBtn.classList.add("fishTodo");
+//    todo.appendChild(doneBtn);
+
+//    const editBtn = document.createElement("button");
+//    editBtn.classList.add("editTodo");
+//    editBtn.innerHTML = "Edit";
+//    todo.appendChild(editBtn);
+
+//    const removeBtn = document.createElement("button");
+//    removeBtn.classList.add("removeTodo");
+//    removeBtn.innerHTML = "Delete";
+//    todo.appendChild(removeBtn);
+
+//    todoList.appendChild(todo);
+
+//     todoInput.value = "";
+//     todoInput.focus();
+
+// }
+
+
+// const toggleForm = () =>
+// {
+//    searchForm.classList.toggle("hide");
+//    todoForm.classList.toggle("hide");
+//    todoList.classList.toggle("hide");
+//    taskCounter.classList.toggle("hide");
+//    editForm.classList.toggle("hide");
+// }
+
+
+
+// const updateTodo = (text) =>
+// {
+//     const todos = document.querySelectorAll("todo");
+
+//     todos.forEach((todo) => 
+//     {
+//       let todoTitle = todo.querySelector("h3");
+//       console.log(`${todoTitle} ,${text}`);
+
+//       if(todoTitle.innerText === oldInputValue)
+//       {
+//          todoTitle.innerText = text ;
+      
+//       }
+//     });
+// }
+
+
+
+
+// todoForm.addEventListener("submit", (e) => 
+// {
+
+// e.preventDefault();
+// const inputValue = todoInput.value;
+// todoInput.value = "";
+
+
+// if(inputValue)
+// {
+//    saveTodo(inputValue);
+//    console.log("Added to ToDo List");
+
+// }
+// else
+// {
+//    setTimeout(() => {
+//     error.style.display = "block";
+//       }, 100);
+//   return ;
+// }
+
+// });
 
 
 
@@ -185,9 +248,102 @@ editForm.addEventListener("submit", (e) =>
 
 
 
+// document.addEventListener("click" , (e) => 
+// {
+
+// const targetEl = e.target;
+// const parentEl = targetEl.closest("div");
+// let todoTitle;
+
+// if(parentEl && parentEl.querySelector("h3"))
+// {
+//    todoTitle = parentEl.querySelector("h3").innerText;
+// }
+
+
+// if(targetEl.classList.contains("fishTodo"))
+// {
+//    parentEl.classList.toggle("done");
+// }
+
+// if(targetEl.classList.contains("removeTodo"))
+// {
+//    parentEl.remove();
+// }
+
+// if(targetEl.classList.contains("editTodo"))
+// {
+//    toggleForm();
+//    console.log("the same text")
+
+//    editInput.value = todoTitle;
+//    oldInputValue = todoTitle;
+
+// }
+
+// });
 
 
 
+
+// cancelEdit.addEventListener("click", (e) => 
+// {
+// e.preventDefault();
+// console.log("cancel edit")
+
+// toggleForm();
+
+// });
+
+
+
+
+// editForm.addEventListener("submit", (e) =>
+// {
+//    e.preventDefault();
+//    const editInputValue = editInput.value;
+
+//    if(editInputValue)
+//    {
+//       updateTodo(editInputValue);
+//       console.log("changed");
+//       toggleForm();
+//    }
+//    else
+//    {
+//       toggleForm();
+//      console.log("canceled");
+//    }
+// })
+
+
+
+// // search
+// const filterTodos = (text) => 
+// {
+//    Array.from(list.children)
+//      .filter((todo) => !todo.textContent.toLowerCase().includes(text))
+//      .forEach((todo) => todo.classList.add("filtered"));
+   
+   
+//    Array.from(list.children)
+//      .filter((todo) => todo.textContent.toLowerCase().includes(text))
+//      .forEach((todo) => todo.classList.remove("filtered"));
+   
+// };
+
+// search.addEventListener("submit", (e) => {
+//    e.preventDefault();
+//  const term = search.value.trim().toLowerCase();
+//    filterTodos(term);
+// });
+
+
+
+
+
+
+//#Code 2
 
 
 
