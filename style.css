@@ -1,150 +1,40 @@
-*
-{
-    padding: 0;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
-    box-sizing: border-box;
+    padding: 0;
 }
 
-body
-{
-    background-image: url(bachG.jpeg);
-    background-position: center;
-    background-size: cover;
-
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
 }
 
-.listApp
-{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 5em;
-    width: min(95vw,31.25em);
-}
-
-.container
-{
-    padding: 2em 2.5em;
-    background-color: rgba(36, 51, 88, 0.5);
-    border-radius: 0.8em;
-    /* display: flex;
-    justify-content: center; */
-}
-
-.back
-{
-    position: relative;
-    display: grid;
-    grid-template-columns: 8fr ;
-    gap: 0.9em;
-    margin-bottom: 0.9em;
-}
-
-.back input
-{
-    width: 100%;
-    background-color: rgba(95, 62, 7, 0.6);
-    color: rgb(239, 245, 245);
-    font-size: 0.9em;
-    border: none;
-    border-bottom: solid 2px #0a4d10;
-    padding: 1em ;
-}
-
-.back button
-{
-    position: relative;
-    border-radius: 1em;
-    font-weight: 500;
-    font-size: 1em;
-    background-color: rgba(62, 76, 117, 0.5);
-    border: none;
-    outline: none;
-    color: rgb(239, 245, 245);
-    cursor: pointer;
-}
-
-#filter
-{
+.todo {
     display: flex;
-    justify-content: space-around;
-    height: 2em;
-    margin-bottom: 1em;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
 }
 
-#filter button
-{
-    border-radius: 1em;
-    font-weight: 700;
-    font-size: 1em;
-    background-color: rgba(79, 84, 131, 0.5);
-    border: none;
-    outline: none;
-    color: rgb(239, 245, 245);
-    cursor: pointer;
-}
-
-.todo 
-{
-   display: flex;
-   justify-content: space-around;
-   align-items: center;
-   padding: 1rem;
-   border-bottom: solid 1px;
-   border-top: solid 1px;
-   transition: 0.3s;
-}
-
-.todo h3
-{
-  flex: 1;
-  font-size: 1rem;  
-}
-
-.group
-{
-    margin-left: 0.4rem;
-}
-
-
-.done
-{
-    background-color: rgba(194, 214, 227, 0.5);
-
-}
-
-.done h3
-{
-    color:#0c4b25;
+.done h3 {
     text-decoration: line-through;
-    font-style: italic;
 }
 
-.hide
-{
-   display: none;
+#controls {
+    display: flex;
+    justify-content: space-between;
 }
 
-
-#show-tasks
-{
-    text-align: center;
-    margin: 1em;
-    border: solid 1px;;
-    padding: 0.8em;
-}
-
-#MessageError
-{
-    text-align: center;
-    background-color: #c46f24;
-    border-radius: 0.8em;
-    color: rgb(168, 172, 206);
-    margin-top: 1.5em;
-    padding: 1em 0;
-    display: none;  /* to display with JS */ 
+button {
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
 }
 
 .filtered {

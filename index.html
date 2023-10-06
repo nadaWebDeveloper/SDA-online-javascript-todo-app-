@@ -2,81 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TO-DO LIST</title>
+    <title>Todo List</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
-
 <body>
-
-<div class="listApp">
-
-    <!-- inside <div> with class container to add flexbox property -->
-<div class="container">
-
-
-    <!-- for put element in columns style -->
-    <form id="todoForm" >
-    <div class="back">
-         <input type="text" id="todoInput" placeholder="......To-Do List......">
-         <button type="submit" id="addBtn">Add</button>
-    </div>
-    </form>
-
-
-    <!-- for search -->
-    <div id="toolbar" class="saerch">
-        <form id="serchForm" class="back search">
-            <input type="text" id="searchInput" class="form-control input-field m-auto" placeholder="search todos">
+    <div class="container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <form id="todoForm">
+            <input type="text" id="todoInput" placeholder="Enter a todo...">
+            <button type="submit">Add</button>
         </form>
-    </div>
-
-
-
-    <div id="filter">
-       <button value="all">All</button>
-       <button value="done">Completed</button>
-       <button value="todo">ToDo</button>
-    </div>
-
-
-        <!-- to show the task on screen by JS when user add task-->
-    <div id="tasks">
-        <p id="show-tasks">
-         YOU HAVE [<span class="count-task">0</span>] TASK TO COMPLETE.<br> 
-         IT'S COMPLETED [<span class="count-completed">0</span>]
-        </p>
-    </div>
-
-
-     <!-- for edit  -->
-    <form id="editForm" class="hide">
-    <div class="back control">
-        <input type="text" id="editInput">
-        <button type="submit">Edit</button>
-        <button id="cancelBtn">Cancel</button>
-    </div>
-    </form>    
-
-
-
-    <div id="todoList" class="back ">
-        <div class="todo done hide">
-            <h3> </h3>
-            <input type="checkbox" name="" class="fishTodo group">
-            <button class="editTodo group">edit</button>
-            <button class="removeTodo group">delete</button>
+        <div id="todoList"></div>
+        <div id="controls">
+            <button id="showAll">All</button>
+            <button id="showActive">Active</button>
+            <button id="showCompleted">Completed</button>
         </div>
+        <div id="counter"></div>
     </div>
-
-</div >
-    <p id="MessageError">INPUT CANNOT BE EMPTY !!!</p>
-</div>
-
-    
-<script src="index.js"></script>
-
+    <script src="./index.js"></script>
 </body>
 </html>
