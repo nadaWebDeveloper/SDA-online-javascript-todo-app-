@@ -1,14 +1,14 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    background-image: url(./bachG.jpeg);
 }
 
 .container {
     max-width: 600px;
     margin: 50px auto;
-    background: #fff;
+    background: rgba(72, 64, 3, 0.51);
     padding: 20px;
     border-radius: 5px;
 }
@@ -36,6 +36,33 @@ button {
     margin: 10px 0;
     cursor: pointer;
 }
+
+#todoForm
+{
+    position: relative;
+    display: grid;
+    grid-template-columns: 8fr ;
+    gap: 0.9em;
+    margin-bottom: 0.9em;
+}
+
+#todoForm input
+{
+    height: 3em;
+    background-color:  rgba(49, 44, 6, 0.51);
+    color: #f8f3f3;
+    
+}
+
+.style
+{
+  background-color: rgba(113, 110, 89, 0.51);
+  border: none;
+  color: bisque;
+  font-size: 1em;
+  
+}
+
 
 .filtered {
     display: none;
