@@ -53,6 +53,13 @@ button {
     color: #f8f3f3;
     
 }
+#todoForm2 input
+{
+    height: 3em;
+    background-color:  rgba(87, 86, 78, 0.307);
+    color: #f8f3f3;
+    
+}
 
 .style
 {
