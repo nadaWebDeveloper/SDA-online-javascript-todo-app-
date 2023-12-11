@@ -61,7 +61,11 @@ input[placeholder] {
     opacity: 1; /* Firefox */
 */
 
-
+input::placeholder {
+    font-weight: bold;
+    opacity: 0.5;
+    color: red;
+  }
 
 .style
 {
