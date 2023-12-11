@@ -50,15 +50,15 @@ button {
 {
     height: 3em;
     background-color:  rgba(49, 44, 6, 0.51);
-    color: #f8f3f3;
+    /* color: #f8f3f3; */
     
 }
 
 
-/* input[placeholder] {
-    color: #f8f3f3;
+input[placeholder] {
+    color: #b40c0c;
     opacity: 1; /* Firefox */
-   */
+}
 
 .style
 {
