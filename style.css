@@ -51,6 +51,8 @@ button {
     height: 3em;
     background-color:  rgba(49, 44, 6, 0.51);
     color: #f8f3f3;
+    border: 1px solid #ddd;
+
     
 }
 #todoForm2 input
