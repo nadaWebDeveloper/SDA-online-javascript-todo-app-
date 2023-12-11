@@ -50,6 +50,7 @@ button {
 {
     height: 3em;
     background-color:  rgba(49, 44, 6, 0.51);
+    border: none;
     /* color: #f8f3f3; */
     
 }
